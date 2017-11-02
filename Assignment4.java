@@ -66,7 +66,7 @@ public static class student {
     }
 }
 
-public static class batch{
+public static class Batch{
 
     student stud[];
     public batch(int stud){
@@ -121,6 +121,7 @@ public static class course{
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
+        Batch bt=new Batch(n);
         for(int i=0;i<n;i++){
             String rollNo=sc.nextLine();
             int m=sc.nextInt();
