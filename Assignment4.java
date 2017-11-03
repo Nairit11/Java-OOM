@@ -54,9 +54,16 @@ public static class student {
 
     private String name;
     private String rollNo;
-    public student(String name,String rollNo){
+    private course[] courses;
+    private int c;
+    private float sum,sumcr;
+    public student(String name,String rollNo,int c){
         this.name=name;
         this.rollNo=rollNo;
+	this.c=c;
+	this.courses=new course[c];
+	this.sum=0.0;
+	this.sumcr=0.0;
     }
     String getname(){
         return name;
@@ -64,6 +71,14 @@ public static class student {
     String getrollNo(){
         return rollNo;
     }
+    float cgpa(){
+    	for(int i=0;i<c;i++){
+	    sum=sum+courses[i].getCredits()*courses[i].getGrade();
+	    sumcr=sumcr+courses[i].getCredits();
+	}
+	return sum/sumcr;
+    }
+
 }
 
 public static class Batch{
@@ -72,8 +87,8 @@ public static class Batch{
     public batch(int stud){
         this.stud=new student[stud];
     }
-    public void st_assign(int i, String rollNo, String name){
-        stud[i]=new student(name,rollNo);
+    public void st_assign(int i, String rollNo, String name,int c){
+        stud[i]=new student(name,rollNo,c);
     }
     student getstudent(int i){
         return stud[i];
@@ -116,6 +131,15 @@ public static class course{
     public int getCredits(){
         return credits;
     }
+}
+
+public static class display{
+	private String rollNo;	
+	public display(String rollno){
+		this.rollNo=rollno;
+	}
+	
+
 }
 
     public static void main(String args[]){
