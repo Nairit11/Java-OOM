@@ -169,6 +169,7 @@ public static class display{
 	    bt.getstudent(i).setc(m);
             for(int j=0;j<m;j++){
 		String courseID=sc.nextLine();
+		String grade=sc.nextLine();
             }
 
         }
