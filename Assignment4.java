@@ -149,8 +149,6 @@ public static class display{
 	public display(String rollno){
 		this.rollNo=rollno;
 	}
-	
-
 }
 
     public static void main(String args[]){
