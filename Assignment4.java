@@ -76,9 +76,6 @@ public static class student {
 	this.c=c;
 	this.courses=new course[c];
     }
-    String getname(){
-        return name;
-    }
     String getrollNo(){
         return rollNo;
     }
@@ -89,7 +86,9 @@ public static class student {
 	}
 	return sum/sumcr;
     }
-
+    public course getCourse(int j){
+	return courses[j];
+    }
 }
 
 public static class Batch{
@@ -112,10 +111,15 @@ public static class course{
     private String grade;
     private int credits;
 
-    public course(String courseID, String grade) {
+    public course(String courseID) {
         this.courseID = courseID;
-        this.grade = grade;
         this.credits=Integer.parseInt(courseID.substring(5,6))+Integer.parseInt(courseID.substring(6,7));
+    }
+    public void setGrade(String grade){
+	if (!(grade.equals("A+") || grade.equals("A") || grade.equals("B+") || grade.equals("B") || grade.equals("C") || grade.equals("D") || grade.equals("E") || grade.equals("F") || grade.equals("I")))
+	    throw new InvalidGradeException(“Illegal Grade”);
+	else
+	    this.grade=grade;
     }
 
     public String getCourseID() {
@@ -150,7 +154,7 @@ public static class display{
 		this.rollNo=rollno;
 	}
 }
-
+public class Assignment4{
     public static void main(String args[]){
         Scanner sc=new Scanner(System.in);
         int n=sc.nextInt();
@@ -168,9 +172,21 @@ public static class display{
             int m=sc.nextInt();
 	    bt.getstudent(i).setc(m);
             for(int j=0;j<m;j++){
-		String courseID=sc.nextLine();
-		String grade=sc.nextLine();
+		try{
+		    String courseID=sc.nextLine();
+		    bt.getstudent(i).getCourse(j)=new course(courseID);
+		}catch(){
+		    System.out.println(e);
+ 		    j--;
+		    continue;
+		}		
+		try{
+		    String grade=sc.nextLine();
+		    bt.getstudent(i).getCourse(j).setGrade(grade);
+		}catch(){
+		    System.out.println(e);
+		}
             }
-
         }
     }
+}
