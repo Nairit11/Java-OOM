@@ -70,7 +70,7 @@ public static class student {
     	        }
 	    }	
         }
-	
+	throw new InvalidRollNoException(“Incorrect Roll Number”);
     }
     void setc(int c){
 	this.c=c;
@@ -168,8 +168,9 @@ public static class display{
 	    }
 	    
             int m=sc.nextInt();
+	    bt.getstudent(i).setc(m);
             for(int j=0;j<m;j++){
-
+		
             }
 
         }
