@@ -52,18 +52,29 @@ public static class InvalidQueryException extends Exception{
 
 public static class student {
 
-    private String name;
     private String rollNo;
     private course[] courses;
     private int c;
     private float sum,sumcr;
-    public student(String name,String rollNo,int c){
-        this.name=name;
-        this.rollNo=rollNo;
+    public student(String rollNo){
+	String sub1=rollNo.substring(0,3);
+	String sub2=rollNo.substring(6,7);
+	int sub3=Integer.parseInt(rollNo.substring(7,10));
+	if(sub1.equals("IIT") || sub1.equals("LIT") || sub1.equals("IIM") || sub1.equals("BIM") || sub1.equals("ICM") || sub1.equals("ISM") || 		sub1.equals("IIM") || sub1.equals("IHM") || sub1.equals("IRM") || sub1.equals("IWM")){
+	    if(sub2.equals("6") || sub2.equals("5") || sub2.equals("4") || sub2.equals("3")){
+		if(sub3>0 && sub3<=199){		
+        	    this.rollNo=rollNo;	
+		    this.sum=0.0;
+	            this.sumcr=0.0;
+		    return;
+    	        }
+	    }	
+        }
+	
+    }
+    void setc(int c){
 	this.c=c;
 	this.courses=new course[c];
-	this.sum=0.0;
-	this.sumcr=0.0;
     }
     String getname(){
         return name;
@@ -87,8 +98,8 @@ public static class Batch{
     public batch(int stud){
         this.stud=new student[stud];
     }
-    public void st_assign(int i, String rollNo, String name,int c){
-        stud[i]=new student(name,rollNo,c);
+    public void st_assign(int i, String rollNo){
+        stud[i]=new student(rollNo);
     }
     student getstudent(int i){
         return stud[i];
@@ -147,7 +158,15 @@ public static class display{
         int n=sc.nextInt();
 	Batch bt=new Batch(n);
         for(int i=0;i<n;i++){
-            String rollNo=sc.nextLine();
+	    try{
+            	String rollNo=sc.nextLine();
+		bt.st_assign(i,rollNo);
+	    }catch(InvalidRollNoException e){
+		System.out.println(e);
+		i--;
+		continue;
+	    }
+	    
             int m=sc.nextInt();
             for(int j=0;j<m;j++){
 
