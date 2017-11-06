@@ -55,7 +55,7 @@ public static class student {
     private String rollNo;
     private course[] courses;
     private int c;
-    private float sum,sumcr;
+    private double sum,sumcr;
     public student(String rollNo){
 	String sub1=rollNo.substring(0,3);
 	String sub2=rollNo.substring(6,7);
@@ -79,7 +79,7 @@ public static class student {
     String getrollNo(){
         return rollNo;
     }
-    float cgpa(){
+    public double getCgpa(){
     	for(int i=0;i<c;i++){
 	    sum=sum+courses[i].getCredits()*courses[i].getGrade();
 	    sumcr=sumcr+courses[i].getCredits();
@@ -118,7 +118,7 @@ public static class course{
 	int str4=Integer.parseInt(courseID.substring(6,7));
 	String str5=coursID.substring(7,8);
 	if(str1.equals("S") || str1.equals("E") || str1.equals("I") || str1.equals("M")){
-	    if(str2>0 && str2<=9 && str3>=0 && str3<=3 && str4>=0 && str4<=3 ){
+	    if(str2>0 && str2<=9 && str3>=0 && str3<=4 && str4>=0 && str4<=3 ){
 		if(str5.equlas("C") || str5.equals("E")){
         	   this.courseID = courseID;
         	   this.credits=Integer.parseInt(courseID.substring(5,6))+Integer.parseInt(courseID.substring(6,7));
@@ -162,9 +162,29 @@ public static class course{
 }
 
 public static class display{
-	private String rollNo;	
-	public display(String rollno){
-		this.rollNo=rollno;
+	private int query;
+	private int n;
+	Batch bt;
+	public display(int n,Batch bt){
+	    this.n=n;
+	    this.bt=bt;
+	}
+	void setQuery(String rollNo){
+		for(int i=0;i<n;i++){
+		    if(bt.getstudent(i).getrollNo().equals(rollNo))
+			break;
+		}
+		if(i==n){
+		    throw new InvalidQueryException(“Roll Number not found”);
+		    return;
+		}
+		this.query=i;
+	}
+	void show(){
+	    int scale = (int) Math.pow(10, 1);
+	    double value=bt.getstudent(i).getCgpa();     
+	    System.out.println((double) Math.round(value * scale) / scale);
+
 	}
 }
 public class Assignment4{
@@ -203,8 +223,17 @@ public class Assignment4{
             }
         }
 	int t=sc.nextInt();
+	display dp=new display(n,bt);
 	for(i=0;i<t;i++){
-	    String query=sc.nextLine();
-	    
+	    try{
+		String query=sc.nextLine();
+	        dp.setQuery(query);
+	    }catch(InvalidQueryException d){
+		System.out.println(d);
+		i--;
+		continue;
+	    }
+	    dp.show();
+	}
     }
 }
