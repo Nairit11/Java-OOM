@@ -112,8 +112,21 @@ public static class course{
     private int credits;
 
     public course(String courseID) {
-        this.courseID = courseID;
-        this.credits=Integer.parseInt(courseID.substring(5,6))+Integer.parseInt(courseID.substring(6,7));
+	String str1=coursID.substring(0,1);
+	int str2=Integer.parseInt(courseID.substring(4,5));
+	int str3=Integer.parseInt(courseID.substring(5,6));
+	int str4=Integer.parseInt(courseID.substring(6,7));
+	String str5=coursID.substring(7,8);
+	if(str1.equals("S") || str1.equals("E") || str1.equals("I") || str1.equals("M")){
+	    if(str2>0 && str2<=9 && str3>=0 && str3<=3 && str4>=0 && str4<=3 ){
+		if(str5.equlas("C") || str5.equals("E")){
+        	   this.courseID = courseID;
+        	   this.credits=Integer.parseInt(courseID.substring(5,6))+Integer.parseInt(courseID.substring(6,7));
+		   return ;
+		}
+	    }    
+	}
+	throw new InvalidCourseCodeException(“Wrong Course Code”);
     }
     public void setGrade(String grade){
 	if (!(grade.equals("A+") || grade.equals("A") || grade.equals("B+") || grade.equals("B") || grade.equals("C") || grade.equals("D") || grade.equals("E") || grade.equals("F") || grade.equals("I")))
