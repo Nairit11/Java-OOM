@@ -176,8 +176,8 @@ public class Assignment4{
 	    try{
             	String rollNo=sc.nextLine();
 		bt.st_assign(i,rollNo);
-	    }catch(InvalidRollNoException e){
-		System.out.println(e);
+	    }catch(InvalidRollNoException a){
+		System.out.println(a);
 		i--;
 		continue;
 	    }
@@ -188,18 +188,23 @@ public class Assignment4{
 		try{
 		    String courseID=sc.nextLine();
 		    bt.getstudent(i).getCourse(j)=new course(courseID);
-		}catch(){
-		    System.out.println(e);
+		}catch(InvalidCourseCodeException b){
+		    System.out.println(b);
  		    j--;
 		    continue;
-		}		
+		}LABEL:		
 		try{
 		    String grade=sc.nextLine();
 		    bt.getstudent(i).getCourse(j).setGrade(grade);
-		}catch(){
-		    System.out.println(e);
+		}catch(InvalidGradeException c){
+		    System.out.println(c);
+		    continue LABEL;
 		}
             }
         }
+	int t=sc.nextInt();
+	for(i=0;i<t;i++){
+	    String query=sc.nextLine();
+	    
     }
 }
