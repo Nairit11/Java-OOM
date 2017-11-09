@@ -60,9 +60,10 @@ class student {
     }
     
     public void setRollNo(String RollNo) throws InvalidRollNoException{
+        //System.out.println(RollNo);
         String sub1=RollNo.substring(0,3);
 	    String sub2=RollNo.substring(6,7);
-	    int sub3=Integer.parseInt(rollNo.substring(7,10));
+	    int sub3=Integer.parseInt(rollNo.substring(7));
 	    if(sub1.equals("IIT") || sub1.equals("LIT") || sub1.equals("IIM") || sub1.equals("BIM") || sub1.equals("ICM") || sub1.equals("ISM") || 		sub1.equals("IIM") || sub1.equals("IHM") || sub1.equals("IRM") || sub1.equals("IWM")){
 	        if(sub2.equals("6") || sub2.equals("5") || sub2.equals("4") || sub2.equals("3")){
 		        if(sub3>0 && sub3<=199){		
@@ -105,7 +106,9 @@ class Batch{
         
     }
     public void st_assign(int i, String rollNo) throws InvalidRollNoException{
-        this.stud[i].setRollNo(rollNo);
+        stud[i]=new student();
+        //System.out.println(rollNo);
+        stud[i].setRollNo(rollNo);
     }
     student getstudent(int i){
         return stud[i];
@@ -127,7 +130,7 @@ class course{
 	    int str2=Integer.parseInt(courseID.substring(4,5));
 	    int str3=Integer.parseInt(courseID.substring(5,6));
 	    int str4=Integer.parseInt(courseID.substring(6,7));
-	    String str5=courseID.substring(7,8);
+	    String str5=courseID.substring(7);
 	    if(str1.equals("S") || str1.equals("E") || str1.equals("I") || str1.equals("M")){
 	        if(str2>0 && str2<=9 && str3>=0 && str3<=4 && str4>=0 && str4<=3 ){
 		        if(str5.equals("C") || str5.equals("E")){
@@ -209,6 +212,7 @@ public class Main{
         for(i=0;i<n;i++){
 	        try{
                 String rollNo=sc.nextLine();
+                System.out.println(rollNo);
 		        bt.st_assign(i,rollNo);
 	        }catch(InvalidRollNoException a){
 		    System.out.println(a);
