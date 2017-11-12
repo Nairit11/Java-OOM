@@ -82,6 +82,9 @@ class student {
     void setc(int c){
 	    this.c=c;
 	    this.courses=new course[c];
+	    for(int i=0;i<c;i++){
+	        courses[i]=new course();
+	    }
     }
     
     String getrollNo(){
@@ -148,7 +151,6 @@ class course{
             }
         }
         if(flag!=1){
-            System.out.println("Hello course");
 	        throw new InvalidCourseCodeException("Wrong Course Code");
         }
     }
@@ -237,7 +239,6 @@ public class Main{
                 while(true){
 		            try{
 		                courseID=sc.nextLine();
-		                System.out.println("Hello "+courseID);
 		                bt.getstudent(i).getCourse(j).setCourseID(courseID);
 		                break;
 		            }catch(InvalidCourseCodeException b){
@@ -257,19 +258,17 @@ public class Main{
         }
     
 	    int t=sc.nextInt();
+	    String query=sc.nextLine();
 	    display dp=new display(n,bt);
 	    for(i=0;i<t;i++){
-                while(true)
-                {
-                    try{
-                    String query=sc.nextLine();
-                    dp.setQuery(query);
-                    break;
-                    }catch(InvalidQueryException d){
+            try{
+                query=sc.nextLine();
+                dp.setQuery(query);
+                dp.show();   
+            }catch(InvalidQueryException d){
                     System.out.println(d);
-                    }
-                }
-            dp.show();
+            }
+            
 	    }                                                                             
     }
 }
