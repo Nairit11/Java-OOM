@@ -1,0 +1,105 @@
+Assignment 4
+
+You are given the roll numbers and list of courses for n students. Also you are given the roll
+numbers of t students. Print their CGPA (till 1st place of decimal). Note that you must minimally
+implement a batch class that stores an array of students, a student class and a course class.
+Input Format
+The first line is n, the number of students. For each student, the first line of input is roll number
+and then the number of courses for that student, m. Thereafter there are multiple lines, mentioning
+the course code and grade of the student in the course, each on separate lines.
+The roll number is of the form ABC201NXYZ, where ABC is either IIT, LIT, ITM, BIM, ICM,
+ISM, IIM, IHM, IRM or IWM. N is either 6, 5, 4 or 3. XYZ is a number between 000 and 199. If
+a roll number is wrongly entered at this stage, the message “Incorrect Roll Number” is printed and
+the user needs to re-enter, till entered correctly.
+The course code is of the form DXYZABCT, where D is I, E, S or M. XYZ are all capital alphabets.
+A is a digit from 1 to 9. B is a digit from 0 to 3. C is a digit from 0 to 3. T is either C or E. If a
+
+course code is incorrect, the message “Wrong Course Code” is printed and the user needs to re-
+enter till entered correctly. The course credits are B+C. Unlike the current system, it is assumed
+
+that the lab and theory have the same grades.
+The grade can be A+, A, B+, B, C, D, E, F and I. Only the first 6 grades are pass grades. If a grade
+is wrongly entered, the message “Illegal Grade” is printed and the user needs to re-enter, till entered
+correctly.
+For n students enter the roll number (format & list given), n courses (list and format), grades (A to
+D only), credits (2 to 5 only), calculate CGPA. All retry.
+The next input is t, the number of queries, followed by t lines, each mentioning the roll number. If
+the roll number exists, the CGPA is printed on the screen, else the message “Roll Number not
+found” is printed on the screen.
+All error messages must be handled as user defined exceptions. Make separate user defined
+exceptions for all types. All exceptions must be triggered at the constructors/setters of the most
+suitable class and not when taking the inputs.
+Sample Input
+3
+IIZ2016001
+IIT2019001
+IIT2016876
+IT2016001
+IIT2016001
+3
+IOOM392C
+
+IOOM332
+IOOM332C
+G
+A
+MAT330C
+SMAT330C
+D
+ITOC330C
+Z+
+B+
+LIT2015001
+3
+ITOC330C
+C
+IOPS339C
+IOPS332C
+A+
+EMIP332C
+D+
+D
+IQM2016001
+RM2016001
+IRM201601
+IRM2016001
+2
+IOOM332C
+A+
+DMIP332C
+EMIP332C
+A
+6
+IRM2016001
+IIT2016002
+LIT2015001
+IT2016001
+IIT2016001
+LIT2015501
+Sample Output
+9.5
+Roll Number not found
+7.1
+Roll Number not found
+7.6
+Roll Number not found
+
+Explanation
+Incorrect Roll Number (IIZ2016001)
+Incorrect Roll Number (IIT2019001)
+Incorrect Roll Number (IIT2016876)
+Incorrect Roll Number (IT2016001)
+Wrong Course Code (IOOM392C)
+Wrong Course Code (IOOM332)
+Illegal Grade (G)
+Wrong Course Code (MAT330C)
+Illegal Grade (Z)
+Wrong Course Code (IOPS339C)
+Illegal Grade (D+)
+Incorrect Roll Number (IQM2016001)
+Incorrect Roll Number (RM2016001)
+Incorrect Roll Number (IRM201601)
+Wrong Course Code (DMIP332C)
+Roll Number not found (IIT2016002)
+Roll Number not found (IT2016001)
+Roll Number not found (LIT2015501)
