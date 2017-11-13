@@ -1,0 +1,12 @@
+Assignment 5
+
+1) Consider question 1 of assignment 2 (The Convocation). Make a GUI to take input, keeping the
+data model the same as before. After all inputs are taken, display the details of all students using a
+suitable GUI. The display GUI should have a left and right button to iterate through students, a
+search bar to find details of a desired student, a modify button to correct any detail, an add button
+to add more data, and a delete button to delete a record. Illegal inputs that do not match the format
+should come as popups.
+2) Consider a drawing app wherein a user fixes a color and a size. On clicking a square of the fixed
+size and color is drawn on the screen. After clicking the last drawn square can be moved on the
+screen using the arrow keys. Please ensure that the data and GUI is as separate as possible in
+separate classes. You must first make a good class diagram and then implement the question.
