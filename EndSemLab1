@@ -1,4 +1,5 @@
 import java.util.*;
+import java.lang.Math.*;
 
 class student{
     private String rollNo;
@@ -34,16 +35,22 @@ class student{
                         int flag=0;
                         for(int k=0;k<tas[j].getF();k++){
                             if(rollNo.equals(tas[j].getFriends(k))){
-                                TAmarks[i]=actualMarks[i]+2;
+                                if(maxMarks[i]-actualMarks[i]>2)
+                                    TAmarks[i]=actualMarks[i]+2;
+                                else
+                                    TAmarks[i]=maxMarks[i];
                                 flag=1;
                                 break;
                             }
                         }
-                        if(flag==1){
-                            TAmarks[i]=actualMarks[i]-1;
+                        if(flag==0){
+                            if(actualMarks[i]!=0)
+                                TAmarks[i]=actualMarks[i]-1;
+                            else
+                                TAmarks[i]=actualMarks[i];
                         }
                     }
-                    tas[j].increaseDev(TAmarks[i]-actualMarks[i]);
+                    tas[j].increaseDev(Math.abs(TAmarks[i]-actualMarks[i]));
                     tas[j].increaseQ();
                     break;
                 }              
@@ -58,12 +65,23 @@ class ta{
     private String type;
     private int s;
     private int c;
+    private int f;
+    private String[] friends;
 
     public ta(String name,String type) {
         this.type = type;
         this.name=name;
         this.s=0;
         this.c=0;
+    }
+    
+    public ta(String name,String type,int f,String[] friends) {
+        this.type = type;
+        this.name=name;
+        this.s=0;
+        this.c=0;
+        this.friends = friends;
+        this.f = f;
     }
 
 
@@ -88,17 +106,6 @@ class ta{
 
     public int getC() {
         return c;
-    }
-    
-}
-
-class dishonestTa extends ta{
-    private int f;
-    private String[] friends;
-    public void dishonestTa(String name,String type,int f,String[] friends) {
-        super(name,type);
-        this.friends = friends;
-        this.f = f;
     }
     
     public int getF(){
@@ -153,7 +160,7 @@ public class Main {
                     for(int j=0;j<f;j++){
                         friends[j]=sc.next();
                     }
-                    tas[i]=new dishonestTa(name,type,f,friends);
+                    tas[i]=new ta(name,type,f,friends);
                 }
                 else{
                     tas[i]=new ta(name,type);
