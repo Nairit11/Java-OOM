@@ -27,42 +27,45 @@ class student{
                     if(tas[j].getType().equals("generous")){
                         TAmarks[i]=actualMarks[i]+1;
                     }
+                    else if(tas[j].getType().equals("oracle")){
+                        TAmarks[i]=actualMarks[i];
+                    }
+                    else if(tas[j].getType().equals("dishonest")){
+                        int flag=0;
+                        for(int k=0;k<tas[j].getF();k++){
+                            if(rollNo.equals(tas[j].getFriends(k))){
+                                TAmarks[i]=actualMarks[i]+2;
+                                flag=1;
+                                break;
+                            }
+                        }
+                        if(flag==1){
+                            TAmarks[i]=actualMarks[i]-1;
+                        }
+                    }
                     tas[j].increaseDev(TAmarks[i]-actualMarks[i]);
                     tas[j].increaseQ();
                     break;
-                }
+                }              
             }
         }
     }
-    
-    public String getRollNo(){
-        return rollNo;
-    }
+
 }
 
 class ta{
     private String name;
     private String type;
-    private int f;
-    private String[] friends;
     private int s;
     private int c;
 
     public ta(String name,String type) {
         this.type = type;
         this.name=name;
-        this.f=0;
         this.s=0;
         this.c=0;
     }
 
-    public void setF(int f) {
-        this.f = f;
-    }
-
-    public void setFriends(int i,String friends) {
-        this.friends[i] = friends;
-    }
 
     public String getName() {
         return name;
@@ -70,14 +73,6 @@ class ta{
 
     public String getType() {
         return type;
-    }
-
-    public int getF() {
-        return f;
-    }
-
-    public String[] getFriends() {
-        return friends;
     }
     
     public void increaseDev(int dev){
@@ -95,6 +90,24 @@ class ta{
         return c;
     }
     
+}
+
+class dishonestTa extends ta{
+    private int f;
+    private String[] friends;
+    public void dishonestTa(String name,String type,int f,String[] friends) {
+        super(name,type);
+        this.friends = friends;
+        this.f = f;
+    }
+    
+    public int getF(){
+        return f;
+    }
+    
+    public String getFriends(int k){
+        return friends[k];
+    }
 }
 
 class display{
@@ -134,8 +147,17 @@ public class Main {
             for(int i=0;i<n;i++){
                 String name=sc.next();
                 String type=sc.next();
-                tas[i]=new ta(name,type);
-                
+                if(type.equals("dishonest")){
+                    int f=sc.nextInt();
+                    String[] friends=new String[f];
+                    for(int j=0;j<f;j++){
+                        friends[j]=sc.next();
+                    }
+                    tas[i]=new dishonestTa(name,type,f,friends);
+                }
+                else{
+                    tas[i]=new ta(name,type);
+                }
             }
 
             student[] stud=new student[m];
@@ -157,6 +179,8 @@ public class Main {
                 }
                 for(int j=0;j<q;j++){
                     ta[j]=sc.next();
+                    
+                
                 }
                 stud[i]=new student(rollNo,type,q,max,tas,n,ta,marks);
             
